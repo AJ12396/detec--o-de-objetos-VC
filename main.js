@@ -4,6 +4,7 @@ var objects = []
 
 function preload() {
     img = loadImage("dog_cat.jpg")
+    song = loadSong("alert.mp3")
 }
 
 function setup() {
@@ -30,7 +31,17 @@ function draw() {
             noFill()
             stroke(r,g,b)
             rect(objects[i].x, objects[i].y, objects[i].width, objects[i].height)
-            document.getElementById("numberOfObjects").innerHTML = "Quantidade de objetos detectados: " + objects.length
+            if (objects[i].label == "person") {
+                document.getElementById("numberOfObjects").innerHTML = "Bebe encontrado!" 
+                song.stop()
+            } else {
+                document.getElementById("numberOfObjects").innerHTML = "Bebe não encontrado!" 
+                song.play()
+            }
+            if (objects[i].length == 0) {
+                document.getElementById("numberOfObjects").innerHTML = "Bebe não encontrado!" 
+                song.play()
+            }
         }
     }
 }
